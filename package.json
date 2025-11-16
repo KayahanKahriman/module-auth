@@ -1,0 +1,39 @@
+{
+  "name": "@auth-module/monorepo",
+  "version": "1.0.0",
+  "description": "A modular, framework-agnostic authentication system for Node.js and Next.js",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=packages/auth-backend",
+    "dev:frontend": "npm run dev --workspace=packages/auth-frontend",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "eslint . --ext .js,.jsx",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "authentication",
+    "auth",
+    "jwt",
+    "express",
+    "nextjs",
+    "modular",
+    "oauth",
+    "rbac"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5",
+    "husky": "^9.0.11"
+  }
+}
