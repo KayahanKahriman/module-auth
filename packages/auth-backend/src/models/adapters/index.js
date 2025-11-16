@@ -7,6 +7,7 @@
 import { PostgreSQLAdapter } from './postgresql.js';
 import { MySQLAdapter } from './mysql.js';
 import { MongoDBAdapter } from './mongodb.js';
+import { MemoryAdapter } from './memory.js';
 
 /**
  * Creates a database adapter based on configuration
@@ -31,9 +32,13 @@ export function createDatabaseAdapter(config) {
     case 'mongo':
       return new MongoDBAdapter(config);
 
+    case 'memory':
+    case 'inmemory':
+      return new MemoryAdapter(config);
+
     default:
       throw new Error(
-        `Unsupported database type: ${dbType}. Supported types are: postgresql, mysql, mongodb`
+        `Unsupported database type: ${dbType}. Supported types are: postgresql, mysql, mongodb, memory`
       );
   }
 }
@@ -63,4 +68,4 @@ export function resetDatabase() {
   dbInstance = null;
 }
 
-export { PostgreSQLAdapter, MySQLAdapter, MongoDBAdapter };
+export { PostgreSQLAdapter, MySQLAdapter, MongoDBAdapter, MemoryAdapter };

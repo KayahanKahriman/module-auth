@@ -7,7 +7,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { createAuthRouter } from './routes/auth.js';
+import { createAuthRouter as buildAuthRoutes } from './routes/auth.js';
 import { getDatabase } from './models/adapters/index.js';
 import { errorHandler } from './utils/errors.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
@@ -56,7 +56,7 @@ export async function createAuthRouter(customConfig = {}) {
   await db.initialize();
 
   // Create router
-  const router = createAuthRouter(db, finalConfig);
+  const router = buildAuthRoutes(db, finalConfig);
 
   return router;
 }
@@ -114,7 +114,7 @@ export async function createAuthApp(customConfig = {}) {
   await db.initialize();
 
   // Authentication routes
-  const authRouter = createAuthRouter(db, finalConfig);
+  const authRouter = buildAuthRoutes(db, finalConfig);
   app.use('/auth', authRouter);
 
   // Root endpoint
@@ -159,6 +159,7 @@ export {
   PostgreSQLAdapter,
   MySQLAdapter,
   MongoDBAdapter,
+  MemoryAdapter,
 } from './models/adapters/index.js';
 
 // Export middleware
